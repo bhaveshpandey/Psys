@@ -41,31 +41,16 @@ Particle::Particle(int _ptnum, const ofVec3f &pos, const ofVec3f &initialVel) :
 	position(pos), 
 	velocity(initialVel)
 	{
-		//since OpenEXR Vec3f doesn't support something like ofVec3f::zero()
-		//cant initialize it in the init list syntax
-		#if (OFCODE)	//CODE COMPATIBILITY WITH OF OR OPENEXR
-			forces.set(0,0,0) ;				//FOR OF COMPATIBLE CODE
-
-		#else
-			forces.setValue(0,0,0) ;		//FOR OPENEXR COMPATIBLE CODE
-
-		#endif
+		//init forces to zero
+		forces.set(0,0,0) ;
 	}
 
 Particle::Particle(int _ptnum, float xpos, float ypos, float zpos, float xvel, float yvel, float zvel) :
 	ptnum(_ptnum)
 	{
-		//since OpenEXR Vec3f doesn't support something like ofVec3f::zero()
-		//cant initialize it in the init list syntax
-		#if (OFCODE)	//CODE COMPATIBILITY WITH OF OR OPENEXR
-			position.set(xpos, ypos, zpos) ;
-			velocity.set(xvel, yvel, zvel) ;
-			forces.set(0.f, 0.f, 0.f) ;
-		#else
-			position.setValue(xpos, ypos, zpos) ;
-			velocity.setValue(xvel, yvel, zvel) ;
-			forces.setValue(0.f, 0.f, 0.f) ;
-		#endif
+		position.set(xpos, ypos, zpos) ;
+		velocity.set(xvel, yvel, zvel) ;
+		forces.set(0.f, 0.f, 0.f) ;
 	}
 
 /*-------------PTNUM--------------------------------*/
@@ -89,13 +74,7 @@ void Particle::setPosition(const ofVec3f &pos)
 }
 void Particle::setPosition(float x, float y, float z) 
 {
-	#if (OFCODE)	//CODE COMPATIBILITY WITH OF OR OPENEXR
-		forces.set(0,0,0) ;				//FOR OF COMPATIBLE CODE
-
-	#else
-		forces.setValue(0,0,0) ;		//FOR OPENEXR COMPATIBLE CODE
-
-	#endif
+	position.set(x,y,z) ;
 }
 ///////////////////////////////////////////////////////
 
@@ -110,13 +89,7 @@ void Particle::setVelocity(const ofVec3f &vel)
 }
 void Particle::setVelocity(float x, float y, float z) 
 {
-	#if (OFCODE)	//CODE COMPATIBILITY WITH OF OR OPENEXR
-		forces.set(0,0,0) ;				//FOR OF COMPATIBLE CODE
-
-	#else
-		forces.setValue(0,0,0) ;		//FOR OPENEXR COMPATIBLE CODE
-
-	#endif
+	velocity.set(x,y,z) ;
 }
 ///////////////////////////////////////////////////////
 
@@ -127,15 +100,7 @@ void Particle::addForce(const ofVec3f &force)
 }
 void Particle::addForce(float x, float y, float z) 
 {
-	#if (OFCODE)	//CODE COMPATIBILITY WITH OF OR OPENEXR
-		forces += ofVec3f(x,y,z) ;				//FOR OF COMPATIBLE CODE
-
-	#else
-		ofVec3f tmp;
-		tmp.setValue(x,y,z) ;
-		forces += tmp ;		//FOR OPENEXR COMPATIBLE CODE
-
-	#endif
+	forces += ofVec3f(x,y,z) ;
 }
 //////////////////////////////////////////////////////
 
@@ -159,9 +124,8 @@ void Particle::update(float timeStep, float maxSpeed)
 /*---------------------------DRAW-------------------------------*/
 void Particle::draw()
 {
+	//draw as points
 	ofSetColor(ofColor::red) ;
-	// ofFill() ;
-	// ofSphere(position.x, position.y, position.z, 1) ;
 	glVertex3f(position.x, position.y, position.z) ;
 }
 //////////////////////////////////////////////////////////////////

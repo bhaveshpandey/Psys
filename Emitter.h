@@ -7,13 +7,6 @@
 //#include "Utility.h"
 
 
-/*---------TO SWITCH OUT WITH OF LATER ON---------------*/
-// typedef Vec3<float> ofVec3f ;
-// typedef Vec2<float> ofVec2f ;
-//////////////////////////////////////////////////////////
-
-
-
 
 class Emitter
 {

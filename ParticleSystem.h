@@ -8,12 +8,8 @@
 //#include "/apps/sidefx/hfs12.5.436/toolkit/include/OpenEXR/ImathVec.h"
 
 
-using namespace IMATH_INTERNAL_NAMESPACE ;
+//using namespace IMATH_INTERNAL_NAMESPACE ;
 
-/*---------TO SWITCH OUT WITH OF LATER ON---------------*/
-// typedef Vec3<float> ofVec3f ;
-// typedef Vec2<float> ofVec2f ;
-//////////////////////////////////////////////////////////
 
 
 class Emitter;		//forward declare Emitter

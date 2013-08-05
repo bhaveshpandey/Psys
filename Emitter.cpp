@@ -40,7 +40,6 @@ void Emitter::emit(bool activate, int num)
 
 void Emitter::emit(bool activate, int num, const ofVec3f &pos, const ofVec3f &vel, float jitterScale)
 {
-	cout << "OFCODE " << OFCODE << endl ;
 	isActive = activate ;
 	if(isActive)
 	{
@@ -67,7 +66,6 @@ void Emitter::emit(bool activate, int num, const ofVec3f &pos, const ofVec3f &ve
 
 void Emitter::emit(bool activate, int num, float xpos, float ypos, float zpos, float xvel, float yvel, float zvel, float jitterScale)
 {
-	cout << "OFCODE " << OFCODE << endl ;
 	isActive = activate ;
 	if(isActive)
 	{
