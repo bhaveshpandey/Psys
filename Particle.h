@@ -23,6 +23,8 @@ protected:
 	ofVec3f position ;
 	ofVec3f velocity ;
 	ofVec3f forces	 ;
+	float mass ;
+	float radius ;
 
 /*---------------OP OVERLOADS---------------------------*/
 public:
@@ -36,8 +38,8 @@ public:
 	~Particle();
 	//COPY INITIALIZER
 	Particle(const Particle &other) ;
-	Particle(int _ptnum, const ofVec3f &pos, const ofVec3f &initialVel) ;
-	Particle(int _ptnum, float xpos, float ypos, float zpos, float xvel, float yvel, float zvel) ;
+	Particle(int _ptnum, const ofVec3f &pos, const ofVec3f &initialVel, float _mass) ;
+	Particle(int _ptnum, float xpos, float ypos, float zpos, float xvel, float yvel, float zvel, float _mass) ;
 
 	int getPtnum() ;
 	void setPtnum(int _ptnum) ;

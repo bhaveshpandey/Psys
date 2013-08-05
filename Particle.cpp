@@ -9,6 +9,8 @@ void Particle::operator = (const Particle &other)
 	this->position 		= other.position ;
 	this->velocity 		= other.velocity ;
 	this->forces	 	= other.forces ;
+	this->mass 			= other.mass ;
+	this->radius 		= other.radius ;
 }
 //Also need to copy particles attributes (maybe a flag for it)
 //Will Implement it later after setting up a functional system
@@ -17,7 +19,7 @@ void Particle::operator = (const Particle &other)
 
 
 
-Particle::Particle() : ptnum(0), position(0)
+Particle::Particle() : ptnum(0), position(0), mass(1), radius(1)
 {
 	// cout << "Initializing default Settings" << endl ;
 	// cout << "position( " << position.x << "," << position.y << "," << position.z << " )" << endl ;
@@ -36,20 +38,26 @@ Particle::Particle(const Particle &other) :
 		<< " from input Particle(ptnum: " << other.ptnum << ")" << endl ;
 	}
 
-Particle::Particle(int _ptnum, const ofVec3f &pos, const ofVec3f &initialVel) :
+Particle::Particle(int _ptnum, const ofVec3f &pos, const ofVec3f &initialVel, float _mass) :
 	ptnum(_ptnum), 
 	position(pos), 
-	velocity(initialVel)
+	velocity(initialVel),
+	mass(_mass)
 	{
+		radius = mass ;
 		//init forces to zero
 		forces.set(0,0,0) ;
 	}
 
-Particle::Particle(int _ptnum, float xpos, float ypos, float zpos, float xvel, float yvel, float zvel) :
-	ptnum(_ptnum)
+Particle::Particle(int _ptnum, float xpos, float ypos, float zpos, float xvel, float yvel, float zvel, float _mass) :
+	ptnum(_ptnum),
+	position(ofVec3f(xpos, ypos, zpos)) ,
+	velocity(ofVec3f(xvel, yvel, zvel)),
+	mass(_mass)
 	{
-		position.set(xpos, ypos, zpos) ;
-		velocity.set(xvel, yvel, zvel) ;
+		radius = mass ;
+		// position.set(xpos, ypos, zpos) ;
+		// velocity.set(xvel, yvel, zvel) ;
 		forces.set(0.f, 0.f, 0.f) ;
 	}
 
@@ -107,13 +115,13 @@ void Particle::addForce(float x, float y, float z)
 /*---------------------------UPDATE-----------------------------*/
 void Particle::update(float timeStep)
 {
-	velocity += forces ;
+	velocity += forces/max(mass,0.0001f) ;
 	position += velocity * timeStep ;
 	forces.set(0,0,0) ;
 }
 void Particle::update(float timeStep, float maxSpeed)
 {
-	velocity += forces ;
+	velocity += forces/max(mass,0.0001f) ;
 	velocity.limit(maxSpeed) ;
 	position += velocity * timeStep ;
 	forces.set(0,0,0) ;

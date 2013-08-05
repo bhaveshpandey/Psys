@@ -38,7 +38,7 @@ void Emitter::emit(bool activate, int num)
 
 }
 
-void Emitter::emit(bool activate, int num, const ofVec3f &pos, const ofVec3f &vel, float jitterScale)
+void Emitter::emit(bool activate, int num, const ofVec3f &pos, const ofVec3f &vel, float _mass, float jitterScale)
 {
 	isActive = activate ;
 	if(isActive)
@@ -47,7 +47,8 @@ void Emitter::emit(bool activate, int num, const ofVec3f &pos, const ofVec3f &ve
 		{
 			ofVec3f jitterPos(pos.x + bp_ofRandomf(i) * jitterScale, pos.y + bp_ofRandomf(i*2) * jitterScale, pos.z + bp_ofRandomf(i*3) * jitterScale) ;
 			ofVec3f jitterVel(vel.x + bp_ofRandomf(i) * jitterScale, vel.y + bp_ofRandomf(i*2) * jitterScale, vel.z + bp_ofRandomf(i*3) * jitterScale) ;
-			Particle *newParticle = new Particle(i, jitterPos, jitterVel) ;
+			float mass = _mass + bp_ofRandomf(i*5) * jitterScale ;
+			Particle *newParticle = new Particle(i, jitterPos, jitterVel, mass) ;
 			//newParticle->setPtnum(i) ;
 			fillThis->push_back(newParticle) ;
 		}	
@@ -64,7 +65,7 @@ void Emitter::emit(bool activate, int num, const ofVec3f &pos, const ofVec3f &ve
 	isActive = false ;
 }
 
-void Emitter::emit(bool activate, int num, float xpos, float ypos, float zpos, float xvel, float yvel, float zvel, float jitterScale)
+void Emitter::emit(bool activate, int num, float xpos, float ypos, float zpos, float xvel, float yvel, float zvel, float _mass, float jitterScale)
 {
 	isActive = activate ;
 	if(isActive)
@@ -75,7 +76,8 @@ void Emitter::emit(bool activate, int num, float xpos, float ypos, float zpos, f
 		{
 			ofVec3f jitterPos(xpos + bp_ofRandomf(i + ctr) * jitterScale, ypos + bp_ofRandomf(i*22 +ctr) * jitterScale, zpos + bp_ofRandomf(i*33 +ctr) * jitterScale) ;
 			ofVec3f jitterVel(xvel + bp_ofRandomf(i +ctr) * jitterScale, yvel + bp_ofRandomf(i*22 +ctr) * jitterScale, zvel + bp_ofRandomf(i*33 +ctr) * jitterScale) ;
-			Particle *newParticle = new Particle(i, jitterPos, jitterVel) ;
+			float mass = _mass + bp_ofRandomf(i*5) * jitterScale ;
+			Particle *newParticle = new Particle(i, jitterPos, jitterVel, mass) ;
 			//newParticle->setPtnum(i) ;
 			fillThis->push_back(newParticle) ;
 			ctr++ ;
