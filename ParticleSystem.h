@@ -35,6 +35,15 @@ public:
 	Emitter* addEmitter(std::string _name) ;
 
 	Particle& getParticle(int num) ;
+	//can be used to set per particle attributes and fields
+	/*------------EXAMPLE--------------
+		vector<Particle*> list = ParticleSystem::getAllParticles() ;
+		for(vector<Particle*>::const_iterator it = list.begin(); it!= list.end(); ++it)
+		{
+			(*it)->addForce(-----); //per particle operation
+		}
+		
+	*/
 	const std::vector<Particle *>& getAllParticles() const ;
 
 
