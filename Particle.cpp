@@ -133,7 +133,6 @@ void Particle::update(float timeStep, float maxSpeed)
 void Particle::draw()
 {
 	//draw as points
-	ofSetColor(ofColor::red) ;
 	glVertex3f(position.x, position.y, position.z) ;
 }
 //////////////////////////////////////////////////////////////////

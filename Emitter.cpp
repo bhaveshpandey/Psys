@@ -95,6 +95,18 @@ void Emitter::emit(bool activate, int num, float xpos, float ypos, float zpos, f
 	isActive = false ;
 }
 
+
+//--------------------IMPLEMENTATION FOR EMISSION FROM OFMESH---------------------------
+void Emitter::emit(bool activate, const ofMesh& mesh, int num, float mass, float jitterScale)
+{
+	
+}
+
+
+
+
+
+
 void Emitter::setName(std::string _name) 
 {
 	name = _name ;

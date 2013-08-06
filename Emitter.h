@@ -43,6 +43,8 @@ public:
 	void emit(bool activate, int num, const ofVec3f &pos, const ofVec3f &vel, float _mass, float jitterScale) ;
 	void emit(bool activate, int num, float xpos, float ypos, float zpos, float xvel, float yvel, float zvel, float _mass, float jitterScale) ;
 
+	//Emit using an ofMesh
+	void emit(bool activate, const ofMesh& mesh, int num, float mass, float jitterScale) ;
 
 	void setName(std::string _name) ;
 	std::string getName() ;

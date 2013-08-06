@@ -26,6 +26,7 @@ protected:
 	float mass ;
 	float radius ;
 
+
 /*---------------OP OVERLOADS---------------------------*/
 public:
 	void operator = (const Particle &other) ;
