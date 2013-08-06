@@ -44,7 +44,10 @@ public:
 	void emit(bool activate, int num, float xpos, float ypos, float zpos, float xvel, float yvel, float zvel, float _mass, float jitterScale) ;
 
 	//Emit using an ofMesh
-	void emit(bool activate, const ofMesh& mesh, int num, float mass, float jitterScale) ;
+	//Disabled input Num of Particles to emit from geo
+	//will implement in next commit
+	//void emit(bool activate, const ofMesh& mesh, int num, float mass, float jitterScale) ;
+	void emit(bool activate, ofMesh &mesh, float mass, float jitterScale) ;
 
 	void setName(std::string _name) ;
 	std::string getName() ;
