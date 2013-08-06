@@ -101,28 +101,32 @@ void Emitter::emit(bool activate, int num, float xpos, float ypos, float zpos, f
 
 void Emitter::emit(bool activate, ofMesh &mesh, float _mass, float jitterScale)
 {
-	std::vector<ofVec3f> verticesInGeo = mesh.getVertices() ;
-	static int ctr = 0;
-	for(std::vector<ofVec3f>::const_iterator it = verticesInGeo.begin(); it != verticesInGeo.end(); ++it)
+	isActive = activate ;
+	if(isActive)
 	{
-		// float xpos = xpos + bp_ofRandomf(ctr) * jitterScale ;
-		// float ypos = ypos + bp_ofRandomf(22 * ctr) * jitterScale ;
-		// float zpos = zpos + bp_ofRandomf(33 * ctr) * jitterScale ;
-		// ofVec3f jitterPos = ofVec3f(xpos, ypos, zpos) ;
-		float mass = _mass + bp_ofRandomf(ctr*5) * jitterScale ;
-		// Particle *newParticle = new Particle(ctr, jitterPos, ofVec3f(0.f, 0.f, 0.f), mass) ;
-		Particle *newParticle = new Particle(ctr, *it , ofVec3f(0.f, 0.f, 0.f), mass) ;
-		fillThis->push_back(newParticle) ;
-		ctr++ ;
+		std::vector<ofVec3f> verticesInGeo = mesh.getVertices() ;
+		static int ctr = 0;
+		for(std::vector<ofVec3f>::const_iterator it = verticesInGeo.begin(); it != verticesInGeo.end(); ++it)
+		{
+			// float xpos = xpos + bp_ofRandomf(ctr) * jitterScale ;
+			// float ypos = ypos + bp_ofRandomf(22 * ctr) * jitterScale ;
+			// float zpos = zpos + bp_ofRandomf(33 * ctr) * jitterScale ;
+			// ofVec3f jitterPos = ofVec3f(xpos, ypos, zpos) ;
+			float mass = _mass + bp_ofRandomf(ctr*5) * jitterScale ;
+			// Particle *newParticle = new Particle(ctr, jitterPos, ofVec3f(0.f, 0.f, 0.f), mass) ;
+			Particle *newParticle = new Particle(ctr, *it , ofVec3f(0.f, 0.f, 0.f), mass) ;
+			fillThis->push_back(newParticle) ;
+			ctr++ ;
+		}
+
+		cout << "Finished emitting " << verticesInGeo.size() << " particles and set initial position and velocity" ;
+		if(name != "")
+			cout <<" from MESH " << name << endl ;
+		else cout << endl ;
 	}
 
-	cout << "Finished emitting " << verticesInGeo.size() << " particles and set initial position and velocity" ;
-	if(name != "")
-		cout <<" from MESH " << name << endl ;
-	else cout << endl ;
-
+	isActive = false ;
 }
-
 ////////////////////////////////////////////////////////////////////////////////////////////
 
 

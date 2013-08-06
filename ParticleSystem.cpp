@@ -70,7 +70,7 @@ void ParticleSystem::update(float timeStep, float maxSpeed)
 void ParticleSystem::draw()
 {
 	glBegin(GL_POINTS) ;
-	glPointSize(2) ;
+	glPointSize(1) ;
 	for(std::vector<Particle*>::const_iterator it = particles.begin(); it != particles.end(); ++it)
 	{
 		(*it)->draw() ;
