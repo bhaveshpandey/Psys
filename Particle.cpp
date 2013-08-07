@@ -11,6 +11,7 @@ void Particle::operator = (const Particle &other)
 	this->forces	 	= other.forces ;
 	this->mass 			= other.mass ;
 	this->radius 		= other.radius ;
+	this->color 		= other.color ;
 }
 //Also need to copy particles attributes (maybe a flag for it)
 //Will Implement it later after setting up a functional system
@@ -19,7 +20,7 @@ void Particle::operator = (const Particle &other)
 
 
 
-Particle::Particle() : ptnum(0), position(0), mass(1), radius(1)
+Particle::Particle() : ptnum(0), position(0), mass(1), radius(1), color(ofColor::white)
 {
 	// cout << "Initializing default Settings" << endl ;
 	// cout << "position( " << position.x << "," << position.y << "," << position.z << " )" << endl ;
@@ -32,7 +33,8 @@ Particle::Particle(const Particle &other) :
 	ptnum(other.ptnum), 
 	position(other.position),
 	velocity(other.velocity),
-	forces(other.forces)
+	forces(other.forces),
+	color(other.color)
 	{
 		cout << "Created Particle(ptnum: " << ptnum << ")" 
 		<< " from input Particle(ptnum: " << other.ptnum << ")" << endl ;
@@ -42,7 +44,8 @@ Particle::Particle(int _ptnum, const ofVec3f &pos, const ofVec3f &initialVel, fl
 	ptnum(_ptnum), 
 	position(pos), 
 	velocity(initialVel),
-	mass(_mass)
+	mass(_mass),
+	color(ofColor::white)
 	{
 		radius = mass ;
 		//init forces to zero
@@ -53,7 +56,8 @@ Particle::Particle(int _ptnum, float xpos, float ypos, float zpos, float xvel, f
 	ptnum(_ptnum),
 	position(ofVec3f(xpos, ypos, zpos)) ,
 	velocity(ofVec3f(xvel, yvel, zvel)),
-	mass(_mass)
+	mass(_mass),
+	color(ofColor::white)
 	{
 		radius = mass ;
 		// position.set(xpos, ypos, zpos) ;
@@ -112,6 +116,26 @@ void Particle::addForce(float x, float y, float z)
 }
 //////////////////////////////////////////////////////
 
+/*--------COLOR--------------------------------------*/
+	void Particle::setColor(const ofColor &_color) 
+	{
+		color = _color ;
+	}
+	void Particle::setColor(const ofVec3f &_color) 
+	{
+		color.set(_color.x, _color.y, _color.z) ;
+	}
+	void Particle::setColor(float r, float g, float b) 
+	{
+		color.set(r, g, b) ;
+	}
+	ofColor& Particle::getColor() 
+	{
+		return color ;
+	}
+//////////////////////////////////////////////////////
+
+
 /*---------------------------UPDATE-----------------------------*/
 void Particle::update(float timeStep)
 {
@@ -133,6 +157,7 @@ void Particle::update(float timeStep, float maxSpeed)
 void Particle::draw()
 {
 	//draw as points
+	ofSetColor(color) ;
 	glVertex3f(position.x, position.y, position.z) ;
 }
 //////////////////////////////////////////////////////////////////

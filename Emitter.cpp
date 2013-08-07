@@ -104,22 +104,40 @@ void Emitter::emit(bool activate, ofMesh &mesh, float _mass, float jitterScale)
 	isActive = activate ;
 	if(isActive)
 	{
-		std::vector<ofVec3f> verticesInGeo = mesh.getVertices() ;
-		static int ctr = 0;
-		for(std::vector<ofVec3f>::const_iterator it = verticesInGeo.begin(); it != verticesInGeo.end(); ++it)
+		// std::vector<ofVec3f> verticesInGeo = mesh.getVertices() ;
+		// static int ctr = 0;
+		// if(mesh.hasColors())
+		// {
+		// 	std::vector<ofColor> colorsInMesh = mesh.getColors() ;
+		// }
+		// for(std::vector<ofVec3f>::const_iterator it = verticesInGeo.begin(); it != verticesInGeo.end(); ++it)
+		// {
+		// // 	// float xpos = xpos + bp_ofRandomf(ctr) * jitterScale ;
+		// // 	// float ypos = ypos + bp_ofRandomf(22 * ctr) * jitterScale ;
+		// // 	// float zpos = zpos + bp_ofRandomf(33 * ctr) * jitterScale ;
+		// // 	// ofVec3f jitterPos = ofVec3f(xpos, ypos, zpos) ;
+		// 	float mass = _mass + bp_ofRandomf(ctr*5) * jitterScale ;
+		// // 	// Particle *newParticle = new Particle(ctr, jitterPos, ofVec3f(0.f, 0.f, 0.f), mass) ;
+		// 	Particle *newParticle = new Particle(ctr, *it , ofVec3f(0.f, 0.f, 0.f), mass) ;
+		// 	fillThis->push_back(newParticle) ;
+		// 	ctr++ ;
+		// }
+
+		for(int i = 0; i < mesh.getNumIndices(); i+=3)
 		{
-			// float xpos = xpos + bp_ofRandomf(ctr) * jitterScale ;
-			// float ypos = ypos + bp_ofRandomf(22 * ctr) * jitterScale ;
-			// float zpos = zpos + bp_ofRandomf(33 * ctr) * jitterScale ;
-			// ofVec3f jitterPos = ofVec3f(xpos, ypos, zpos) ;
-			float mass = _mass + bp_ofRandomf(ctr*5) * jitterScale ;
-			// Particle *newParticle = new Particle(ctr, jitterPos, ofVec3f(0.f, 0.f, 0.f), mass) ;
-			Particle *newParticle = new Particle(ctr, *it , ofVec3f(0.f, 0.f, 0.f), mass) ;
-			fillThis->push_back(newParticle) ;
-			ctr++ ;
+			ofVec3f curVertex = mesh.getVertex(mesh.getIndex(i)) ;
+			float mass = _mass + bp_ofRandomf(i * 5) * jitterScale ;
+			Particle *newParticle = new Particle(i, curVertex , ofVec3f(0.f, 0.f, 0.f), mass) ;
+			//if mesh has colors, particles will inherit those 
+			if(mesh.hasColors())
+			{
+				ofColor curVertexColor = mesh.getColor(mesh.getIndex(i)) ;
+				newParticle->setColor(curVertexColor) ;
+			}
+		 	fillThis->push_back(newParticle) ;
 		}
 
-		cout << "Finished emitting " << verticesInGeo.size() << " particles and set initial position and velocity" ;
+		cout << "Finished emitting " << mesh.getNumIndices() << " particles and set initial position and velocity" ;
 		if(name != "")
 			cout <<" from MESH " << name << endl ;
 		else cout << endl ;

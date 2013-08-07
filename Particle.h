@@ -25,6 +25,7 @@ protected:
 	ofVec3f forces	 ;
 	float mass ;
 	float radius ;
+	ofColor color ;
 
 
 /*---------------OP OVERLOADS---------------------------*/
@@ -65,6 +66,15 @@ public:
 	//system
 	void addForce(const ofVec3f &force) ;
 	void addForce(float x, float y, float z) ;
+	///////////////////////////////////////////////////////
+
+	/*--------COLOR--------------------------------------*/
+	void setColor(const ofColor &_color) ;
+	//for setting colors using vectors like vel etc
+	void setColor(const ofVec3f &_color) ;
+	void setColor(float r, float g, float b) ;
+	ofColor& getColor() ;
+	//////////////////////////////////////////////////////
 
 
 	void update(float timeStep) ;
