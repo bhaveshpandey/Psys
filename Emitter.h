@@ -40,8 +40,10 @@ public:
 	void emit(bool activate, int num) ;
 
 	//set Initial position and velocity of particles
-	void emit(bool activate, int num, const ofVec3f &pos, const ofVec3f &vel, float _mass, float jitterScale) ;
-	void emit(bool activate, int num, float xpos, float ypos, float zpos, float xvel, float yvel, float zvel, float _mass, float jitterScale) ;
+	void emit(bool activate, int num, const ofVec3f &pos, const ofVec3f &vel, float xvelVar, float yvelVar, float zvelVar, 
+		float _mass, float massVar, const ofColor& color) ;
+	void emit(bool activate, int num, float xpos, float ypos, float zpos, float xvel, float yvel, float zvel, 
+		float xvelVar, float yvelVar, float zvelVar, float _mass, float massVar, const ofColor& color) ;
 
 	//Emit using an ofMesh
 	//Disabled input Num of Particles to emit from geo

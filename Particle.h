@@ -44,8 +44,10 @@ public:
 	~Particle();
 	//COPY INITIALIZER
 	Particle(const Particle &other) ;
-	Particle(int _ptnum, const ofVec3f &pos, const ofVec3f &initialVel, float _mass) ;
-	Particle(int _ptnum, float xpos, float ypos, float zpos, float xvel, float yvel, float zvel, float _mass) ;
+	//setting variance using particle constructors..
+	//this will clean up the code for emitters and reduce redundant code..
+	Particle(int _ptnum, const ofVec3f &pos, const ofVec3f &initialVel, float xvelVar, float yvelVar, float zvelVar, float _mass, float massVar) ;
+	Particle(int _ptnum, float xpos, float ypos, float zpos, float xvel, float yvel, float zvel, float xvelVar, float yvelVar, float zvelVar, float _mass, float massVar) ;
 
 	int getPtnum() const ;
 	void setPtnum(int _ptnum) ;

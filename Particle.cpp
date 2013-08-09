@@ -44,28 +44,31 @@ Particle::Particle(const Particle &other) :
 		<< " from input Particle(ptnum: " << other.ptnum << ")" << endl ;
 	}
 
-Particle::Particle(int _ptnum, const ofVec3f &pos, const ofVec3f &initialVel, float _mass) :
+Particle::Particle(int _ptnum, const ofVec3f &pos, const ofVec3f &initialVel, float xvelVar, float yvelVar, float zvelVar, float _mass, float massVar) :
 	ptnum(_ptnum), 
 	position(pos), 
-	mass(_mass),
 	color(ofColor::white)
 	{
+		ofVec3f jitterVel(Utility::of_Randomuf(ptnum) * xvelVar, Utility::of_Randomuf(ptnum*2) * yvelVar, Utility::of_Randomuf(ptnum*3) * zvelVar) ;
+		velocity = initialVel + jitterVel;
+		mass = abs( _mass + Utility::of_Randomuf(ptnum) ) ;
 		radius = mass ;
-		velocity = initialVel ;
 		//init forces to zero
 		forces.set(0,0,0) ;
 	}
 
-Particle::Particle(int _ptnum, float xpos, float ypos, float zpos, float xvel, float yvel, float zvel, float _mass) :
+Particle::Particle(int _ptnum, float xpos, float ypos, float zpos, float xvel, float yvel, float zvel, float xvelVar, float yvelVar, float zvelVar, float _mass, float massVar) :
 	ptnum(_ptnum),
 	position(ofVec3f(xpos, ypos, zpos)) ,
-	velocity(ofVec3f(xvel, yvel, zvel)),
-	mass(_mass),
 	color(ofColor::white)
 	{
-		radius = mass ;
 		// position.set(xpos, ypos, zpos) ;
 		// velocity.set(xvel, yvel, zvel) ;
+		ofVec3f jitterVel(Utility::of_Randomuf(ptnum) * xvelVar, Utility::of_Randomuf(ptnum*2) * yvelVar, Utility::of_Randomuf(ptnum*3) * zvelVar) ;
+		velocity = ofVec3f(xvel, yvel, zvel) + jitterVel;
+		mass = abs( _mass + Utility::of_Randomuf(ptnum) ) ;
+		radius = mass ;
+		//init forces to zero
 		forces.set(0.f, 0.f, 0.f) ;
 	}
 
@@ -121,22 +124,22 @@ void Particle::addForce(float x, float y, float z)
 //////////////////////////////////////////////////////
 
 /*--------COLOR--------------------------------------*/
-	void Particle::setColor(const ofColor &_color) 
-	{
-		color = _color ;
-	}
-	void Particle::setColor(const ofVec3f &_color) 
-	{
-		color.set(_color.x, _color.y, _color.z) ;
-	}
-	void Particle::setColor(float r, float g, float b) 
-	{
-		color.set(r, g, b) ;
-	}
-	ofColor& Particle::getColor() 
-	{
-		return color ;
-	}
+void Particle::setColor(const ofColor &_color) 
+{
+	color = _color ;
+}
+void Particle::setColor(const ofVec3f &_color) 
+{
+	color.set(_color.x, _color.y, _color.z) ;
+}
+void Particle::setColor(float r, float g, float b) 
+{
+	color.set(r, g, b) ;
+}
+ofColor& Particle::getColor() 
+{
+	return color ;
+}
 //////////////////////////////////////////////////////
 
 
