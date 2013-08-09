@@ -6,6 +6,7 @@
 //#include "/apps/sidefx/hfs12.5.436/toolkit/include/OpenEXR/ImathVec.h" 		//for work env
 //#include "/opt/hfs12.5.449/toolkit/include/OpenEXR/ImathVec.h"			//for home env
 #include "ofMain.h"
+#include "Utility.h"
 
 using std::cin ;
 using std::cout ;
@@ -26,6 +27,9 @@ protected:
 	float mass ;
 	float radius ;
 	ofColor color ;
+	// float life ;
+	// float maxLife ;
+	// float lifeVariance ;
 
 
 /*---------------OP OVERLOADS---------------------------*/

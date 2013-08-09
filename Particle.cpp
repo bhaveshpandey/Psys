@@ -12,6 +12,10 @@ void Particle::operator = (const Particle &other)
 	this->mass 			= other.mass ;
 	this->radius 		= other.radius ;
 	this->color 		= other.color ;
+	//Life should be initialised to 0 as the particle is Born
+	// this->life 			= 0 ;
+	// this->maxLife 		= other.maxLife ;
+	// this->lifeVariance	= other.lifeVariance ;
 }
 //Also need to copy particles attributes (maybe a flag for it)
 //Will Implement it later after setting up a functional system
@@ -20,7 +24,7 @@ void Particle::operator = (const Particle &other)
 
 
 
-Particle::Particle() : ptnum(0), position(0), mass(1), radius(1), color(ofColor::white)
+Particle::Particle() : ptnum(0), position(ofVec3f::zero()), mass(1.f), radius(1.f), color(ofColor::white)
 {
 	// cout << "Initializing default Settings" << endl ;
 	// cout << "position( " << position.x << "," << position.y << "," << position.z << " )" << endl ;
@@ -43,11 +47,11 @@ Particle::Particle(const Particle &other) :
 Particle::Particle(int _ptnum, const ofVec3f &pos, const ofVec3f &initialVel, float _mass) :
 	ptnum(_ptnum), 
 	position(pos), 
-	velocity(initialVel),
 	mass(_mass),
 	color(ofColor::white)
 	{
 		radius = mass ;
+		velocity = initialVel ;
 		//init forces to zero
 		forces.set(0,0,0) ;
 	}

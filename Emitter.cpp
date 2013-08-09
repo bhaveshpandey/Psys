@@ -45,9 +45,9 @@ void Emitter::emit(bool activate, int num, const ofVec3f &pos, const ofVec3f &ve
 	{
 		for(int i= 0 ; i< num ; i++ )
 		{
-			ofVec3f jitterPos(pos.x + bp_ofRandomf(i) * jitterScale, pos.y + bp_ofRandomf(i*2) * jitterScale, pos.z + bp_ofRandomf(i*3) * jitterScale) ;
-			ofVec3f jitterVel(vel.x + bp_ofRandomf(i) * jitterScale, vel.y + bp_ofRandomf(i*2) * jitterScale, vel.z + bp_ofRandomf(i*3) * jitterScale) ;
-			float mass = _mass + bp_ofRandomf(i*5) * jitterScale ;
+			ofVec3f jitterPos(pos.x + Utility::of_Randomf(i) * jitterScale, pos.y + Utility::of_Randomf(i*2) * jitterScale, pos.z + Utility::of_Randomf(i*3) * jitterScale) ;
+			ofVec3f jitterVel(vel.x + Utility::of_Randomf(i) * jitterScale, vel.y + Utility::of_Randomf(i*2) * jitterScale, vel.z + Utility::of_Randomf(i*3) * jitterScale) ;
+			float mass = _mass + Utility::of_Randomf(i*5) * jitterScale ;
 			//using SIZE() of the vector to set ptnum..
 			Particle *newParticle = new Particle(fillThis->size(), jitterPos, jitterVel, mass) ;
 			//newParticle->setPtnum(i) ;
@@ -75,9 +75,9 @@ void Emitter::emit(bool activate, int num, float xpos, float ypos, float zpos, f
 		static int ctr = 0;
 		for(int i= 0 ; i< num ; i++ )
 		{
-			ofVec3f jitterPos(xpos + bp_ofRandomf(i + ctr) * jitterScale, ypos + bp_ofRandomf(i*22 +ctr) * jitterScale, zpos + bp_ofRandomf(i*33 +ctr) * jitterScale) ;
-			ofVec3f jitterVel(xvel + bp_ofRandomf(i +ctr) * jitterScale, yvel + bp_ofRandomf(i*22 +ctr) * jitterScale, zvel + bp_ofRandomf(i*33 +ctr) * jitterScale) ;
-			float mass = _mass + bp_ofRandomf(i*5) * jitterScale ;
+			ofVec3f jitterPos(xpos + Utility::of_Randomf(i + ctr) * jitterScale, ypos + Utility::of_Randomf(i*22 +ctr) * jitterScale, zpos + Utility::of_Randomf(i*33 +ctr) * jitterScale) ;
+			ofVec3f jitterVel(xvel + Utility::of_Randomf(i +ctr) * jitterScale, yvel + Utility::of_Randomf(i*22 +ctr) * jitterScale, zvel + Utility::of_Randomf(i*33 +ctr) * jitterScale) ;
+			float mass = _mass + Utility::of_Randomf(i*5) * jitterScale ;
 			Particle *newParticle = new Particle(fillThis->size(), jitterPos, jitterVel, mass) ;
 			//newParticle->setPtnum(i) ;
 			fillThis->push_back(newParticle) ;
@@ -113,11 +113,11 @@ void Emitter::emit(bool activate, ofMesh &mesh, float _mass, float jitterScale)
 		// }
 		// for(std::vector<ofVec3f>::const_iterator it = verticesInGeo.begin(); it != verticesInGeo.end(); ++it)
 		// {
-		// // 	// float xpos = xpos + bp_ofRandomf(ctr) * jitterScale ;
-		// // 	// float ypos = ypos + bp_ofRandomf(22 * ctr) * jitterScale ;
-		// // 	// float zpos = zpos + bp_ofRandomf(33 * ctr) * jitterScale ;
+		// // 	// float xpos = xpos + Utility::of_Randomf(ctr) * jitterScale ;
+		// // 	// float ypos = ypos + Utility::of_Randomf(22 * ctr) * jitterScale ;
+		// // 	// float zpos = zpos + Utility::of_Randomf(33 * ctr) * jitterScale ;
 		// // 	// ofVec3f jitterPos = ofVec3f(xpos, ypos, zpos) ;
-		// 	float mass = _mass + bp_ofRandomf(ctr*5) * jitterScale ;
+		// 	float mass = _mass + Utility::of_Randomf(ctr*5) * jitterScale ;
 		// // 	// Particle *newParticle = new Particle(ctr, jitterPos, ofVec3f(0.f, 0.f, 0.f), mass) ;
 		// 	Particle *newParticle = new Particle(ctr, *it , ofVec3f(0.f, 0.f, 0.f), mass) ;
 		// 	fillThis->push_back(newParticle) ;
@@ -127,7 +127,7 @@ void Emitter::emit(bool activate, ofMesh &mesh, float _mass, float jitterScale)
 		for(int i = 0; i < mesh.getNumIndices(); i+=3)
 		{
 			ofVec3f curVertex = mesh.getVertex(mesh.getIndex(i)) ;
-			float mass = _mass + bp_ofRandomf(i * 5) * jitterScale ;
+			float mass = _mass + Utility::of_Randomf(i * 5) * jitterScale ;
 			Particle *newParticle = new Particle(fillThis->size(), curVertex , ofVec3f(0.f, 0.f, 0.f), mass) ;
 			//if mesh has colors, particles will inherit those 
 			if(mesh.hasColors())
@@ -164,10 +164,3 @@ bool Emitter::isEmitterActive()
 	return isActive ;
 }
 
-
-//////////////////HELPER----------
-float Emitter::bp_ofRandomf(int seed)
-{
-	ofSeedRandom(seed) ;
-	return ofRandomf() ;
-}

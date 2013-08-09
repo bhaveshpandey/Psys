@@ -55,9 +55,6 @@ public:
 	bool isEmitterActive() ;
 
 
-	//helper
-	float bp_ofRandomf(int seed) ;
-
 };
 
 #endif
