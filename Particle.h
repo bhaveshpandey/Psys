@@ -43,7 +43,7 @@ public:
 	Particle(int _ptnum, const ofVec3f &pos, const ofVec3f &initialVel, float _mass) ;
 	Particle(int _ptnum, float xpos, float ypos, float zpos, float xvel, float yvel, float zvel, float _mass) ;
 
-	int getPtnum() ;
+	int getPtnum() const ;
 	void setPtnum(int _ptnum) ;
 
 	/*-------POSITION------------------------------------*/

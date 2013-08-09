@@ -50,7 +50,7 @@ public:
 
 	void addForce(const ofVec3f &force) ;
 	void addForce(float x, float y, float z) ;
-	// void kill(Particle &particleToKill) ;
+	void kill(Particle *particleToKill) ;
 	void update(float timeStep) ;
 	void update(float timeStep, float maxSpeed) ;
 	void draw() ;

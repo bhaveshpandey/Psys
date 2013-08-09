@@ -63,12 +63,12 @@ void ParticleSystem::addForce(float x, float y, float z)
 	}
 }
 
-// void ParticleSystem::kill(Particle &particleToKill)
-// {
-// 	std::vector<Particle *>::iterator it = std::find(particles.begin(), particles.end(), &particleToKill) ;
-// 	delete *it ;
-// 	particles.erase(it) ;
-// }
+void ParticleSystem::kill(Particle *particleToKill)
+{
+	std::vector<Particle *>::iterator it = std::find(particles.begin(), particles.end(), particleToKill) ;
+	delete *it ;
+	particles.erase(it) ;
+}
 
 void ParticleSystem::update(float timeStep)
 {

@@ -66,7 +66,7 @@ Particle::Particle(int _ptnum, float xpos, float ypos, float zpos, float xvel, f
 	}
 
 /*-------------PTNUM--------------------------------*/
-int Particle::getPtnum()
+int Particle::getPtnum() const
 {
 	return ptnum ;
 }
