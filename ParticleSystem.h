@@ -2,6 +2,7 @@
 #define __PARTICLESYSTEM_H__
 
 
+#include <algorithm>			//for std::find()
 #include <vector>
 #include "Particle.h"
 #include "Emitter.h"
@@ -27,7 +28,7 @@ public:
 	~ParticleSystem() ;
 
 	void setPosition();
-	ofVec3f getPosition() ;
+	ofVec3f& getPosition() ;
 	int numParticles() ;
 
 
@@ -49,6 +50,7 @@ public:
 
 	void addForce(const ofVec3f &force) ;
 	void addForce(float x, float y, float z) ;
+	// void kill(Particle &particleToKill) ;
 	void update(float timeStep) ;
 	void update(float timeStep, float maxSpeed) ;
 	void draw() ;

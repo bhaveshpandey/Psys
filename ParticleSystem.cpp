@@ -3,10 +3,22 @@
 
 ParticleSystem::ParticleSystem() {}
 
-ParticleSystem::~ParticleSystem() {}
+ParticleSystem::~ParticleSystem() 
+{
+	cout << "Deleting ParticleSystem! Removing " << particles.size() << " particles." << endl ;
+
+	for(std::vector<Particle*>::iterator it = particles.begin(); it != particles.end(); ++it)
+	{
+		delete *it ;
+	}
+	particles.clear() ;
+}
 
 void ParticleSystem::setPosition()	{}
-ofVec3f ParticleSystem::getPosition() {}
+ofVec3f& ParticleSystem::getPosition() 
+{
+	return position ;
+}
 
 int ParticleSystem::numParticles()
 {
@@ -50,6 +62,13 @@ void ParticleSystem::addForce(float x, float y, float z)
 		(*it)->addForce(x, y, z) ;
 	}
 }
+
+// void ParticleSystem::kill(Particle &particleToKill)
+// {
+// 	std::vector<Particle *>::iterator it = std::find(particles.begin(), particles.end(), &particleToKill) ;
+// 	delete *it ;
+// 	particles.erase(it) ;
+// }
 
 void ParticleSystem::update(float timeStep)
 {
