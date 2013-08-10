@@ -56,8 +56,8 @@ public:
 	void update(float timeStep, float maxSpeed) ;
 	void draw() ;
 
-	void getAABB(ofVec3f &min, ofVec3f &max) ;
-	void drawAABB(const ofVec3f &min, const ofVec3f &max) ;
+	// void getAABB(ofVec3f &min, ofVec3f &max) ;
+	// void drawAABB(const ofVec3f &min, const ofVec3f &max) ;
 
 
 	
