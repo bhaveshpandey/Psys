@@ -4,6 +4,7 @@
 
 #include <algorithm>			//for std::find()
 #include <vector>
+#include <limits>
 #include "Particle.h"
 #include "Emitter.h"
 //#include "/apps/sidefx/hfs12.5.436/toolkit/include/OpenEXR/ImathVec.h"
@@ -54,6 +55,10 @@ public:
 	void update(float timeStep) ;
 	void update(float timeStep, float maxSpeed) ;
 	void draw() ;
+
+	void getAABB(ofVec3f &min, ofVec3f &max) ;
+	void drawAABB(const ofVec3f &min, const ofVec3f &max) ;
+
 
 	
 
