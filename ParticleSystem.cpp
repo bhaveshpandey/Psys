@@ -124,9 +124,9 @@ void ParticleSystem::getAABB(ofVec3f &min, ofVec3f &max)
 				max.y = (*it)->getPosition().y ;
 
 			//set min and max XPOS
-			if( (*it)->getPosition().x < min.z )
+			if( (*it)->getPosition().z < min.z )
 				min.z = (*it)->getPosition().z ;
-			if( (*it)->getPosition().x > max.z )
+			if( (*it)->getPosition().z > max.z )
 				max.z = (*it)->getPosition().z ;
 		}
 
@@ -136,6 +136,9 @@ void ParticleSystem::getAABB(ofVec3f &min, ofVec3f &max)
 
 void ParticleSystem::drawAABB(const ofVec3f &min, const ofVec3f &max)
 {
+	//only need to draw 6 faces..
+	//no need to draw common/shared edges for each face
+
 	//draw MIN ZX plane
 	ofLine(min.x, min.y, min.z, max.x, min.y, min.z) ;
 	ofLine(min.x, min.y, max.z, max.x, min.y, max.z) ;
