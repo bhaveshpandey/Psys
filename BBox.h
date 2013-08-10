@@ -11,17 +11,24 @@
 class BBox
 {
 private:
+	//private data members to store min and max values
 	ofVec3f min ;
 	ofVec3f max ;
 
 
 public:
 	BBox() ;
-	// BBox() ;
 	~BBox() ;
 
+/*--------------track bounds of a vector of Particle pointers---------------*/
+	void trackBounds( const std::vector<Particle*> &particles ) ;
+//////////////////////////////////////////////////////////////////////////////
 
-	void trackBounds(const std::vector<Particle*> &particles ) ;
+/*---------------------------track bounds of OFMESH-------------------------*/
+	void trackBounds( const std::vector<ofVec3f> &meshVertices ) ;
+//////////////////////////////////////////////////////////////////////////////
+
+
 	void draw(const ofColor &color) ;
 
 	ofVec3f& getMin() ;

@@ -16,7 +16,7 @@ BBox::~BBox()
 
 }
 
-
+/*--------------------------track bounds of a vector of Particle pointers-------------------------*/
 void BBox::trackBounds(const std::vector<Particle*> &particles) 
 {
 	if(!particles.empty())
@@ -49,10 +49,48 @@ void BBox::trackBounds(const std::vector<Particle*> &particles)
 				max.z = (*it)->getPosition().z ;
 		}
 
-		// cout << "xmin:" << min.x << " xmax:" << max.x << endl ;
 	}
-
 }
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/*------------------------------------track bounds of OFMESH-------------------------------------------*/
+//to avoid any dynamic memory alloc supply this a Vector of Vertices.
+void BBox::trackBounds(const std::vector<ofVec3f> &meshVertices )
+{
+if(!meshVertices.empty())
+	{
+		//unable to use numeric_limits in initialisation
+		//need to get a way to use that instead of these
+		//hardcoded numbers..
+		min.set(1000000.f, 1000000.f, 1000000.f) ;
+		max.set(-1000000.f, -1000000.f, -1000000.f) ;
+
+		// min = ofVec3f(tmp_min, tmp_min, tmp_min) ;
+		for(std::vector<ofVec3f>::const_iterator it = meshVertices.begin(); it != meshVertices.end(); ++it)
+		{
+			//set min and max XPOS
+			if( it->x < min.x )
+				min.x = it->x ;
+			if( it->x > max.x )
+				max.x = it->x ;
+
+			//set min and max YPOS
+			if( it->y < min.y )
+				min.y = it->y ;
+			if( it->y > max.y )
+				max.y = it->y ;
+
+			//set min and max XPOS
+			if( it->z < min.z )
+				min.z = it->z ;
+			if( it->z > max.z )
+				max.z = it->z ;
+		}
+
+	}	
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 void BBox::draw(const ofColor &color) 
 {
