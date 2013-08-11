@@ -4,7 +4,6 @@
 
 #include <vector>
 #include "Particle.h"
-//#include "Utility.h"
 
 
 
@@ -32,16 +31,25 @@ public:
 	Emitter() ;
 	//Emitter(const ParticleSystem &psys) ;
 	~Emitter() ;
+	//Just to create an emitter without name
+	//name can then be set using setName()
 	Emitter(std::vector<Particle*> &emitInThis) ;
 	//Bind name to the emitter when using multiple emitters.
 	Emitter(std::string _name, std::vector<Particle*> &emitInThis) ;
 
+
+/*---------------------------------------------------------EMISSION---------------------------------------------------------*/
 	//point emission
+	//Uses emitters position to emit from..
 	void emit(bool activate, int num) ;
 
 	//set Initial position and velocity of particles
+	//using ofVec3f
+	//Constructor's getting too cluttered. Need to find a 
+	//better solution for initialising and applying variance
 	void emit(bool activate, int num, const ofVec3f &pos, const ofVec3f &vel, float xvelVar, float yvelVar, float zvelVar, 
 		float _mass, float massVar, const ofColor& color) ;
+	//using floats
 	void emit(bool activate, int num, float xpos, float ypos, float zpos, float xvel, float yvel, float zvel, 
 		float xvelVar, float yvelVar, float zvelVar, float _mass, float massVar, const ofColor& color) ;
 
@@ -51,10 +59,26 @@ public:
 	//void emit(bool activate, const ofMesh& mesh, int num, float mass, float jitterScale) ;
 	void emit(bool activate, ofMesh &mesh, float mass, float jitterScale) ;
 
+//////////////////////////////////////////////////////////EMISSION///////////////////////////////////////////////////////////
+
+
+/*------------------------------------------------------------NAME-----------------------------------------------------------*/
+	//set emitter's name
 	void setName(std::string _name) ;
 	std::string getName() ;
+//////////////////////////////////////////////////////////////NAME//////////////////////////////////////////////////////////////
 
+
+/*---------------------------------------------------EMITTER STATUS-----------------------------------------------------------*/
 	bool isEmitterActive() ;
+/////////////////////////////////////////////////////EMITTER STATUS/////////////////////////////////////////////////////////////
+
+
+/*-------------------------------------------------------EMITTER POSITION-------------------------------------------------------*/
+	void setPosition(const ofVec3f &pos) ;
+	void setPosition(float x, float y, float z) ;
+	const ofVec3f& getPosition() const ;
+/////////////////////////////////////////////////////////EMITTER POSITION/////////////////////////////////////////////////////////
 
 
 };
@@ -77,7 +101,7 @@ public:
 
 4)	An Emitter which takes in the geometry and emits from its
 	points/vertices etc.
+	RESOLVED
 
 5)	Extend this to emission from surfaces later on.
-
 */

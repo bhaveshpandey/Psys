@@ -1,18 +1,23 @@
 #include "Emitter.h"
 
 
-Emitter::Emitter() : fillThis(NULL), isActive(false)
+Emitter::Emitter() : fillThis(NULL), isActive(false), position(ofVec3f::zero())
 {
 	cout << "Default Emitter" << endl ;
 }
 
-Emitter::Emitter(std::vector<Particle*> &emitInThis) : 	fillThis(&emitInThis), isActive(false) { }
+Emitter::Emitter(std::vector<Particle*> &emitInThis) : 	fillThis(&emitInThis), isActive(false), position(ofVec3f::zero())
+{ }
 
 Emitter::Emitter(std::string _name, std::vector<Particle*> &emitInThis) : 
-	name(_name), fillThis(&emitInThis), isActive(false)	{ }
+	name(_name), fillThis(&emitInThis), isActive(false), position(ofVec3f::zero())	{ }
 
 Emitter::~Emitter()	{}
 
+
+/*---------------------------------------------------------EMISSION---------------------------------------------------------*/
+//point emission
+//Uses emitters position to emit from..
 void Emitter::emit(bool activate, int num)
 {
 	isActive = activate ;
@@ -20,8 +25,7 @@ void Emitter::emit(bool activate, int num)
 	{
 		for(int i= 0 ; i< num ; i++ )
 		{
-			Particle *newParticle = new Particle() ;
-			//newParticle->setPtnum(i) ;
+			Particle *newParticle = new Particle(fillThis->size(), position, ofVec3f::zero(), 0.f,0.f,0.0f, 1000.f, 100.f) ;
 			fillThis->push_back(newParticle) ;
 		}	
 
@@ -39,7 +43,7 @@ void Emitter::emit(bool activate, int num)
 }
 
 void Emitter::emit(bool activate, int num, const ofVec3f &pos, const ofVec3f &vel, 
-	float xvelVar, float yvelVar, float zvelVar,	float mass, float massVar, const ofColor &color)
+	float xvelVar, float yvelVar, float zvelVar, float mass, float massVar, const ofColor &color)
 {
 	isActive = activate ;
 	if(isActive)
@@ -93,7 +97,7 @@ void Emitter::emit(bool activate, int num, float xpos, float ypos, float zpos, f
 }
 
 
-//--------------------IMPLEMENTATION FOR EMISSION FROM OFMESH---------------------------
+//----------------------------------IMPLEMENTATION FOR EMISSION FROM OFMESH-----------------------------------------
 // void Emitter::emit(bool activate, const ofMesh& mesh, int num, float mass, float jitterScale) {}
 
 void Emitter::emit(bool activate, ofMesh &mesh, float mass, float massVar)
@@ -141,9 +145,11 @@ void Emitter::emit(bool activate, ofMesh &mesh, float mass, float massVar)
 
 	isActive = false ;
 }
-////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////EMISSION////////////////////////////////////////////////////////////////
 
 
+
+/*-----------------------------------------------------------------NAME-----------------------------------------------------------------*/
 void Emitter::setName(std::string _name) 
 {
 	name = _name ;
@@ -153,9 +159,29 @@ std::string Emitter::getName()
 {
 	return name ;
 }
+///////////////////////////////////////////////////////////////////NAME////////////////////////////////////////////////////////////////////
 
+
+
+/*-----------------------------------------------------------EMITTER STATUS--------------------------------------------------------------*/
 bool Emitter::isEmitterActive()
 {
 	return isActive ;
 }
+/////////////////////////////////////////////////////////////EMITTER STATUS////////////////////////////////////////////////////////////////
 
+
+/*------------------------------------------------------------EMITTER POSITION------------------------------------------------------------*/
+void Emitter::setPosition(const ofVec3f &pos) 
+{
+	position = pos ;
+}
+void Emitter::setPosition(float x, float y, float z) 
+{
+	position.set(x, y, z) ;
+}
+const ofVec3f& Emitter::getPosition() const 
+{
+	return position ;
+}
+//////////////////////////////////////////////////////////////EMITTER POSITION//////////////////////////////////////////////////////////////
