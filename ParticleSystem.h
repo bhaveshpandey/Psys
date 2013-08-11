@@ -48,6 +48,13 @@ public:
 	*/
 	const std::vector<Particle *>& getAllParticles() const ;
 
+//better to set values in a supplied vector than creating a new
+	//vector and then re
+	//Also cant return vector by ref as it will be destroyed after the function ends
+	//So best/safest alternative is to modify supplied vector
+	void getAllParticlePosition(std::vector<ofVec3f> &posOfAll) ;
+
+
 
 	void addForce(const ofVec3f &force) ;
 	void addForce(float x, float y, float z) ;

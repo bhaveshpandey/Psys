@@ -47,6 +47,14 @@ const std::vector<Particle *>& ParticleSystem::getAllParticles() const
 	return particles ;
 }
 
+void ParticleSystem::getAllParticlePosition(std::vector<ofVec3f> &posOfAll)
+{
+	for(std::vector<Particle*>::const_iterator it = particles.begin(); it != particles.end(); ++it)
+	{
+		posOfAll.push_back((*it)->getPosition()) ;
+	}
+}
+
 void ParticleSystem::addForce(const ofVec3f &force)
 {
 	for(std::vector<Particle*>::const_iterator it = particles.begin(); it != particles.end(); ++it)

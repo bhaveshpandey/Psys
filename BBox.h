@@ -20,11 +20,10 @@ public:
 	BBox() ;
 	~BBox() ;
 
-/*--------------track bounds of a vector of Particle pointers---------------*/
-	void trackBounds( const std::vector<Particle*> &particles ) ;
-//////////////////////////////////////////////////////////////////////////////
 
 /*---------------------------track bounds of OFMESH-------------------------*/
+//ofMesh is a vector of ofVec3f vertices so this should work for a generic
+//version which accepts a vector<ofVec3f> to track.
 	void trackBounds( const std::vector<ofVec3f> &meshVertices ) ;
 //////////////////////////////////////////////////////////////////////////////
 
